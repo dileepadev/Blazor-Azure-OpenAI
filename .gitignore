@@ -1,0 +1,66 @@
+#  .NET Blazor app, covering both server-side and WebAssembly versions:
+
+# Built files
+**/bin/
+**/obj/
+**/*.@(cache,dll,pdb,xml,cs,csproj,sln,suo,user,userprefs,log,config,runtimeconfig.json)**
+**/[Pp]ackages/*
+**/artifacts/*
+
+# Temporary files
+**/.cache/
+**/.tmp/
+**/temp/*
+
+# Visual Studio specific files
+**/.vs/
+**/.vscode/
+
+# IDE specific files
+**/_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+**/.JustCode
+
+# Build add-in
+**/_TeamCity*
+
+# Code coverage tool
+**/.dotCover
+**/_NCrunch_*
+*.crunch*.local.xml
+**/nCrunchTemp_*
+
+# Web workbench (sass)
+**/.sass-cache/
+
+# Installshield output folder
+**/[Ee]xpress/
+
+# Unit test results
+**/TestResult.xml
+
+# App publish settings
+**/PublishScripts/
+
+# NuGet packages
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+
+# NuGet v3
+**/.nuget/
+
+# Local settings
+**/.env
+**/.settings.json
+
+# Sensitive information
+**/secrets.json
+**/appsettings.Development.json
+
+# Any other files you want to ignore
+# Example:
+# **/MyCustomDataFile.txt
+
+## Secret Keys OpenAPI
+**/appsettings.json

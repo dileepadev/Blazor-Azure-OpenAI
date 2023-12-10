@@ -1,0 +1,89 @@
+﻿@page "/"
+
+<PageTitle>Blazor + Azure + OpenAI</PageTitle>
+
+@using OpenAI_API
+@using OpenAI_API.Completions
+
+@inject IConfiguration Configuration
+@inject ILogger<Home> Logger
+
+
+<div class="container text-center">
+    <h3>Text Generation 🤖</h3>
+    <p>Type in your text, and our AI will generate more content for you.
+        <br>It's that easy! Give it a go and see what happens.
+    </p>
+
+    <div class="form-group">
+        <label for="promptText">Enter your text here:</label>
+        <textarea style="margin-top: 10px" class="form-control" id="promptText" rows="5" @bind="promptText"></textarea>
+
+        <button style="margin-top: 20px" class="btn btn-dark" @onclick="GenerateText">Generate Text</button>
+
+        @if (!string.IsNullOrEmpty(generatedText))
+        {
+            <div style="margin-top: 20px">
+                <label for="generatedText">Generated Text:</label>
+                <textarea style="margin-top: 10px" class="form-control" id="generatedText" rows="5"
+                    readonly>@generatedText</textarea>
+            </div>
+        }
+    </div>
+</div>
+
+@if (isLoading)
+{
+    <div style="margin-top: 20px" class="container text-center">Loading...</div>
+}
+
+@code {
+    private OpenAIAPI? client;
+    private string? promptText;
+    private string? generatedText;
+    private bool isLoading;
+
+    private string? apiKey;
+
+    protected override void OnInitialized()
+    {
+        apiKey = Configuration.GetValue<string>("SecretKeys:APIKey");
+
+        if (string.IsNullOrEmpty(apiKey))
+        {
+            return;
+        }
+
+        client = new OpenAIAPI(apiKey);
+    }
+
+    private async Task GenerateText()
+    {
+        try
+        {
+            isLoading = true;
+
+            var parameters = new CompletionRequest
+                {
+                    Model = "text-davinci-003",
+                    Prompt = promptText,
+                    Temperature = 0.7,
+                    MaxTokens = 100
+                };
+
+            var response = await client!.Completions.CreateCompletionAsync(parameters);
+
+            generatedText = response.Completions[0].Text;
+        }
+        catch (Exception ex)
+        {
+            generatedText = "Error generating text";
+            Logger.LogError("Error generating text: ", ex);
+
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+}
