@@ -13,6 +13,8 @@ This is a sample text generation app using OpenAI's GPT-3 API. It's built with B
 
    - Location of the file: [wwwroot/appsettings.json](./Blazor-Azure-OpenAI/wwwroot/appsettings.json)
 
+   - Create a free account on [OpenAI](https://platform.openai.com/) and get your API key from [here](https://platform.openai.com/account/api-keys)
+
    - Content of the file:
 
    ```json
@@ -34,6 +36,6 @@ This is a sample text generation app using OpenAI's GPT-3 API. It's built with B
    - `dotnet run`: for development
    - `dotnet run watch`: for development with hot reload
    - `dotnet publish`: for production
-5. Open the app in your browser at `https://localhost:[port]`
+5. Open the app in your browser at `http://localhost:[port]`
    - The port will be displayed in the terminal
    - Find the `launchSettings.json` file in the [Properties](./Blazor-Azure-OpenAI/Properties/) folder to change the port
